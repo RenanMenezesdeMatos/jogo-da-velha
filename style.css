@@ -172,7 +172,34 @@ body{
 }
 .win{
     color: lightgreen;
-    transition: ease-in-out 0.2s;
+    transition: cubic-bezier(0.65, 0.05, 0.36, 1) 0.2s;
+}
+
+.jogador02{
+    color:#EE6C4D;
+    display: flex;
+    width: 90px;
+    height: 80px;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    cursor: pointer;
+}
+
+#pop-up-reset{
+    background-color: #EE6C4D;
+    position: absolute;
+    min-width: calc(100vw - 25%);
+    min-height: calc(100vh - 25%);
+    margin-top: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: #00000040 0px 1px 9px 3px
 }
 
 /* FIM DO DESENHO DO JOGO DA VELHA */

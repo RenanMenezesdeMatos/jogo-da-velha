@@ -3,6 +3,8 @@ const player02 = document.getElementById('player-02')
 let boardRegions = document.querySelectorAll('.click')
 let table = []
 let turnPlayer = ''
+let placarPlayer01 = []
+let placarPlayer02 = []
 
 //Capturar Valores do Input e Desabilitando o canal
 
@@ -60,18 +62,20 @@ player02.addEventListener('click', function(){
 function updateTitle(){
 
     const playerInput = document.getElementById(turnPlayer)
-    document.getElementById('turn-player').innerText = aaaa
+    document.getElementById('turn-player').innerText = 'aaaa'
+
 }
 
 function initializeGame(){
     table = [['','',''],['','',''],['','','']]
     turnPlayer = 'player-name-01'
-    document.querySelector('h1').innerHTML = "<span id='turn-player'>JOGADOR DA RODADA</span>"
+    document.querySelector('h1').innerHTML = "<span id='turn-player' class='jogador01'>JOGADOR DA RODADA</span>"
     updateTitle()
     boardRegions.forEach(function(element){
         element.classList.remove('win')//criar classe no CSS com win
         element.innerText = ''
         element.addEventListener('click', handleBoardClick)
+        element.classList = 'click'
     })
 }
 
@@ -97,9 +101,11 @@ function getWinRegions(){
 
 }
 
+
+
 function disableRegion(element){
     element.style.cursor = 'default'
-    removeEventListener('click', handleBoardClick)
+    element.removeEventListener('click', handleBoardClick)
 }
 
 function disebledAllRegions (){
@@ -107,6 +113,11 @@ function disebledAllRegions (){
         regiao.removeEventListener('click', handleBoardClick)
         regiao.style.cursor = 'default'
     })
+}
+
+function updatePlacar(){
+    document.getElementById('scoreboard01').value = placarPlayer01.length
+    document.getElementById('scoreboard02').value = placarPlayer02.length
 }
 
 function handleWin (regions){
@@ -136,13 +147,14 @@ function handleBoardClick(ev) {
     const winRegions = getWinRegions ()
     if (winRegions.length > 0) {
         handleWin(winRegions)
+        turnPlayer === 'player-name-01' ? placarPlayer01.push('1'): placarPlayer02.push('1')
+        updatePlacar()
         disebledAllRegions()
     } else if (table.flat().includes('')){
         turnPlayer = turnPlayer === "player-name-01" ? 'player-name-02' : 'player-name-01'
-        updateTitle
+        turnPlayer === 'player-name-01' ? ev.currentTarget.classList.add('jogador02') : ev.currentTarget.add('click')
     } else {
         document.querySelector('h1').innerHTML = 'Empate!'
-        
     }
     
 }

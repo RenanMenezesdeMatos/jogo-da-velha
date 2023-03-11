@@ -119,10 +119,11 @@ function getWinRegions(){
 }
 
 function resetGame(){
+    popUpReset.classList.remove('pop-up-reset')
+    oldGame.classList.remove('old-game')
 
-    document.getElementsByClassName('pop-up-reset').classList.remove('pop-up-reset')
-    document.getElementsByClassName('old-game').classList.remove('old-game')
-    
+    popUpReset.classList.add('pop-up-reset-end')
+    oldGame.classList.add('old-game-end')
 }
 
 function disableRegion(element){
@@ -172,7 +173,6 @@ function handleBoardClick(ev) {
         turnPlayer === 'player-name-01' ? placarPlayer01.push('1'): placarPlayer02.push('1')
         updatePlacar()
         disebledAllRegions()
-        resetGame()
     } else if (table.flat().includes('')){
         turnPlayer = turnPlayer === "player-name-01" ? 'player-name-02' : 'player-name-01'
         turnPlayer === 'player-name-01' ? ev.currentTarget.classList.add('jogador02') : ev.currentTarget.add('click')

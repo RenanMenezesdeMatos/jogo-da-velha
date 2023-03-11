@@ -1,10 +1,22 @@
+// Variaveis de captura de botões
 const player01 = document.getElementById('player-01')
 const player02 = document.getElementById('player-02')
+
+// Variáveis de captura de valores do jogo da velha
 let boardRegions = document.querySelectorAll('.click')
 let table = []
 let turnPlayer = ''
+
+// Arrays que controla os placares
 let placarPlayer01 = []
 let placarPlayer02 = []
+let keepPlaying = document.getElementById('butom-yes')
+
+// Variáveis para reset do game
+let popUpReset = document.getElementsByClassName('pop-up-reset')
+let oldGame = document.getElementsByClassName('old-game')
+
+//keepPlaying.addEventListener('click', initializeGame)
 
 //Capturar Valores do Input e Desabilitando o canal
 
@@ -76,6 +88,11 @@ function initializeGame(){
         element.innerText = ''
         element.addEventListener('click', handleBoardClick)
         element.classList = 'click'
+        element.cursor = 'pointer'
+
+        popUpReset.classList='pop-up-reset' // With display none
+        oldGame.classList='old-game-initialize' // With display flex
+
     })
 }
 
@@ -101,7 +118,12 @@ function getWinRegions(){
 
 }
 
+function resetGame(){
 
+    document.getElementsByClassName('pop-up-reset').classList.remove('pop-up-reset')
+    document.getElementsByClassName('old-game').classList.remove('old-game')
+    
+}
 
 function disableRegion(element){
     element.style.cursor = 'default'
@@ -150,6 +172,7 @@ function handleBoardClick(ev) {
         turnPlayer === 'player-name-01' ? placarPlayer01.push('1'): placarPlayer02.push('1')
         updatePlacar()
         disebledAllRegions()
+        resetGame()
     } else if (table.flat().includes('')){
         turnPlayer = turnPlayer === "player-name-01" ? 'player-name-02' : 'player-name-01'
         turnPlayer === 'player-name-01' ? ev.currentTarget.classList.add('jogador02') : ev.currentTarget.add('click')
@@ -170,3 +193,5 @@ function startGame(){
         console.log('teste falso')
     }
 }
+
+

@@ -13,8 +13,8 @@ let placarPlayer02 = []
 let keepPlaying = document.getElementById('butom-yes')
 
 // Variáveis para reset do game
-let popUpReset = document.getElementsByClassName('pop-up-reset')
-let oldGame = document.getElementsByClassName('old-game')
+//let popUpReset = document.querySelector('#pop-up-reset')
+//let oldGame = document.querySelector('#old-game')
 
 //keepPlaying.addEventListener('click', initializeGame)
 
@@ -74,8 +74,8 @@ player02.addEventListener('click', function(){
 function updateTitle(){
 
     const playerInput = document.getElementById(turnPlayer)
-    document.getElementById('turn-player').innerText = 'aaaa'
-
+    
+ 
 }
 
 function initializeGame(){
@@ -90,8 +90,8 @@ function initializeGame(){
         element.classList = 'click'
         element.cursor = 'pointer'
 
-        popUpReset.classList='pop-up-reset' // With display none
-        oldGame.classList='old-game-initialize' // With display flex
+        document.getElementById('pop-up-reset').classList='pop-up-reset' // With display none
+        document.getElementById('old-game').classList='old-game' // With display flex
 
     })
 }
@@ -119,22 +119,31 @@ function getWinRegions(){
 }
 
 function resetGame(){
-    popUpReset.classList.remove('pop-up-reset')
-    oldGame.classList.remove('old-game')
 
+    let popUpReset = document.querySelector('#pop-up-reset')
+    let oldGame = document.querySelector('#old-game')
+
+    popUpReset.classList.remove('pop-up-reset')
+    oldGame.classList.remove('old-game-initialize')
     popUpReset.classList.add('pop-up-reset-end')
     oldGame.classList.add('old-game-end')
+
+    document.getElementById('buttom-yes').addEventListener('click', function(){
+        document.getElementById('pop-up-reset').classList.remove('pop-up-reset-end')
+        initializeGame()
+    })
+    
 }
 
 function disableRegion(element){
-    element.style.cursor = 'default'
+    //element.style.cursor = 'default'
     element.removeEventListener('click', handleBoardClick)
 }
 
 function disebledAllRegions (){
     boardRegions.forEach(function (regiao){
         regiao.removeEventListener('click', handleBoardClick)
-        regiao.style.cursor = 'default'
+        //regiao.style.cursor = 'default'
     })
 }
 
@@ -149,6 +158,7 @@ function handleWin (regions){
     })
     const playerr = document.getElementById (turnPlayer).innerText
     document.querySelector('h1').innerText = playerr + ' é demais e venceu essa partida!'
+    resetGame()
     
 }
 
@@ -172,12 +182,14 @@ function handleBoardClick(ev) {
         handleWin(winRegions)
         turnPlayer === 'player-name-01' ? placarPlayer01.push('1'): placarPlayer02.push('1')
         updatePlacar()
+        
         disebledAllRegions()
     } else if (table.flat().includes('')){
         turnPlayer = turnPlayer === "player-name-01" ? 'player-name-02' : 'player-name-01'
         turnPlayer === 'player-name-01' ? ev.currentTarget.classList.add('jogador02') : ev.currentTarget.add('click')
     } else {
         document.querySelector('h1').innerHTML = 'Empate!'
+        resetGame()
     }
     
 }

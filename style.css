@@ -203,7 +203,9 @@ body{
     box-shadow: 0 8px 32px 0 #4d226e4d; 
     backdrop-filter: blur( 13.5px );
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 )
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    transition: ease-out 1s;
+    transition-delay: 2s;
 }
 
 .pop-up-reset h2{
@@ -229,7 +231,9 @@ body{
     box-shadow: 0 8px 32px 0 #4d226e4d; 
     backdrop-filter: blur( 13.5px );
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 )
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    transition: ease-out 1s;
+    transition-delay: 2s;
 }
 
 .pop-up-reset-end h2{
@@ -246,7 +250,8 @@ body{
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-
+    transition: ease-out 1s;
+    transition-delay: 2s;
 }
 
 /* Fim da área de reset */
